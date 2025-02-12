@@ -47,19 +47,29 @@
 <body>
     <h1>Click an Image to See More Info</h1>
     <div class="image-container">
-        <img src="pc1.jpg" alt="Image 1" onclick="showPopup('Pricilla Chao')">
-        <img src="lp_image.jpg" alt="Image 2" onclick="showPopup('Ms Chao')">
-        <img src="IMG_4816.JPG" alt="Image 3" onclick="showPopup('gang')">
+        <img src="pc1.jpg" alt="Image 1" onclick="requestPassword('Pricilla Chao', 'pass1')">
+        <img src="lp_image.jpg" alt="Image 2" onclick="requestPassword('Ms Chao', 'pass2')">
+        <img src="IMG_4816.JPG" alt="Image 3" onclick="requestPassword('gang', 'pass3')">
     </div>
     <div class="popup" id="popup">
         <p id="popup-text"></p>
         <button onclick="hidePopup()">Close</button>
     </div>
     <script>
+        function requestPassword(text, correctPassword) {
+            let userInput = prompt("Enter password:");
+            if (userInput === correctPassword) {
+                showPopup(text);
+            } else {
+                alert("Incorrect password!");
+            }
+        }
+
         function showPopup(text) {
             document.getElementById('popup-text').innerText = text;
             document.getElementById('popup').style.display = 'block';
         }
+        
         function hidePopup() {
             document.getElementById('popup').style.display = 'none';
         }

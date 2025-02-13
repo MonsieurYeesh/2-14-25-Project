@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentines DAY SUGAR!!!</title>
+    <title>Valentine's Day Sugar!!!</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,6 +18,25 @@
         h1 {
             color: red;
         }
+
+        /* Quote Section */
+        .quote-container {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            width: 300px;
+            font-family: "Georgia", serif;
+            font-size: 20px;
+            font-style: italic;
+            color: darkred;
+            transform: rotate(-10deg);
+            background: rgba(255, 255, 255, 0.6);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Image Gallery */
         .gallery-container {
             position: relative;
             width: 600px;
@@ -46,73 +65,44 @@
             padding: 10px;
             border-radius: 5px;
         }
-        .prev {
-            left: 0;
-        }
-        .next {
-            right: 0;
-        }
-        .quote-container {
-            position: absolute;
-            top: 30%;
-            left: 5%;
-            width: 300px;
-            font-family: "Georgia", serif;
-            font-size: 20px;
-            font-style: italic;
-            color: darkred;
-            transform: rotate(-10deg);
-            background: rgba(255, 255, 255, 0.6);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        }
+        .prev { left: 0; }
+        .next { right: 0; }
+
+        /* Love Letter Section */
         .love-letter-container {
-    position: absolute;
-    top: 40%;
-    right: 5%;
-    width: 300px;
-    text-align: center;
-}
-
-.love-letter-container button {
-    background-color: pink;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.love-letter {
-    display: none;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 10px;
-    font-family: "Georgia", serif;
-    font-size: 18px;
-    color: darkred;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-        <div class="love-letter-container">
-    <button onclick="showLoveLetter()">💌 Click to Reveal</button>
-    <div class="love-letter" id="love-letter">
-        <p>My Dearest,</p>
-        <p>You are the best part of my days, the sweetest thought in my mind, and the warmest feeling in my heart. Every moment with you is a treasure, and I can’t wait for all the memories we have yet to make. 💖</p>
-        <p>Forever Yours,</p>
-        <p>💌 [Your Name]</p>
-    </div>
-</div>
-
-
+            position: absolute;
+            top: 40%;
+            right: 5%;
+            width: 300px;
+            text-align: center;
+        }
+        .love-letter-container button {
+            background-color: pink;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .love-letter {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 10px;
+            font-family: "Georgia", serif;
+            font-size: 18px;
+            color: darkred;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
-    <h1>HAPPY VALENTINES DAY P!!!!</h1>
+    <h1>HAPPY VALENTINE'S DAY P!!!!</h1>
 
     <!-- Audio Element -->
     <audio controls autoplay loop>
@@ -120,6 +110,7 @@
         Your browser does not support the audio element.
     </audio>
 
+    <!-- Image Gallery -->
     <div class="gallery-container">
         <button class="nav-button prev" onclick="prevImage()">&#10094;</button>
         <div class="gallery" id="gallery">
@@ -135,8 +126,20 @@
         <button class="nav-button next" onclick="nextImage()">&#10095;</button>
     </div>
 
-        <div class="quote-container">
-    <p>“It’s one of the great cosmic mysteries. How is it that someone can go from being a total stranger to the most important person in your life?”-Dex</p>
+    <!-- Quote Section -->
+    <div class="quote-container">
+        <p>“It’s one of the great cosmic mysteries. How is it that someone can go from being a total stranger to the most important person in your life?” - Dex</p>
+    </div>
+
+    <!-- Love Letter Section -->
+    <div class="love-letter-container">
+        <button onclick="showLoveLetter()">💌 Click to Reveal</button>
+        <div class="love-letter" id="love-letter">
+            <p>Ms Goofy Pricilla</p>
+            <p>(think of something, hi Calina</p>
+            <p>Forever Yours,</p>
+            <p>Henry</p>
+        </div>
     </div>
 
     <script>
@@ -144,40 +147,35 @@
         const gallery = document.getElementById('gallery');
         const images = document.querySelectorAll('.gallery img');
         const totalImages = images.length;
-        
+
         function updateGallery() {
             gallery.style.transform = `translateX(-${index * 600}px)`;
         }
-        
+
         function nextImage() {
-            if (index < totalImages - 1) {
-                index++;
-            } else {
-                index = 0;
-            }
+            index = (index + 1) % totalImages;
             updateGallery();
         }
-        
+
         function prevImage() {
-            if (index > 0) {
-                index--;
-            } else {
-                index = totalImages - 1;
-            }
+            index = (index - 1 + totalImages) % totalImages;
             updateGallery();
         }
-        
+
         function autoSlide() {
             nextImage();
             setTimeout(autoSlide, 3000);
         }
-        
+
         setTimeout(autoSlide, 3000);
 
         function showLoveLetter() {
-    document.getElementById("love-letter").style.display = "block";
-}
-
+            let letter = document.getElementById("love-letter");
+            letter.style.display = "block";
+            setTimeout(() => {
+                letter.style.opacity = "1";
+            }, 50);
+        }
     </script>
 </body>
 </html>

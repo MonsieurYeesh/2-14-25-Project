@@ -3,75 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Click Popup</title>
+    <title>Sliding Image Gallery</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
         }
-        .image-container {
+        .gallery-container {
+            position: relative;
+            width: 300px;
+            margin: auto;
+            overflow: hidden;
+        }
+        .gallery {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            transition: transform 0.5s ease-in-out;
         }
-        .image-container img {
-            width: 150px;
-            height: 150px;
-            cursor: pointer;
+        .gallery img {
+            width: 300px;
+            height: 300px;
             border-radius: 10px;
         }
-        .popup {
-            display: none;
-            position: fixed;
+        .nav-button {
+            position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
-        }
-        .popup button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            border: none;
-            background: red;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
             color: white;
+            border: none;
             cursor: pointer;
+            padding: 10px;
             border-radius: 5px;
+        }
+        .prev {
+            left: 0;
+        }
+        .next {
+            right: 0;
         }
     </style>
 </head>
 <body>
-    <h1>Click an Image to See More Info</h1>
-    <div class="image-container">
-        <img src="pc1.jpg" alt="Image 1" onclick="requestPassword('Pricilla Chao', 'pass1')">
-        <img src="lp_image.jpg" alt="Image 2" onclick="requestPassword('Ms Chao', 'pass2')">
-        <img src="IMG_4816.JPG" alt="Image 3" onclick="requestPassword('gang', 'pass3')">
-    </div>
-    <div class="popup" id="popup">
-        <p id="popup-text"></p>
-        <button onclick="hidePopup()">Close</button>
+    <h1>Sliding Picture Gallery</h1>
+    <div class="gallery-container">
+        <button class="nav-button prev" onclick="prevImage()">&#10094;</button>
+        <div class="gallery" id="gallery">
+            <img src="pc1.jpg" alt="Image 1">
+            <img src="lp_image.jpg" alt="Image 2">
+            <img src="IMG_4816.JPG" alt="Image 3">
+        </div>
+        <button class="nav-button next" onclick="nextImage()">&#10095;</button>
     </div>
     <script>
-        function requestPassword(text, correctPassword) {
-            let userInput = prompt("Enter password:");
-            if (userInput === correctPassword) {
-                showPopup(text);
-            } else {
-                alert("Incorrect password!");
-            }
-        }
-
-        function showPopup(text) {
-            document.getElementById('popup-text').innerText = text;
-            document.getElementById('popup').style.display = 'block';
+        let index = 0;
+        const images = document.querySelectorAll('.gallery img');
+        const totalImages = images.length;
+        
+        function updateGallery() {
+            document.getElementById('gallery').style.transform = `translateX(-${index * 300}px)`;
         }
         
-        function hidePopup() {
-            document.getElementById('popup').style.display = 'none';
+        function nextImage() {
+            index = (index + 1) % totalImages;
+            updateGallery();
+        }
+        
+        function prevImage() {
+            index = (index - 1 + totalImages) % totalImages;
+            updateGallery();
         }
     </script>
 </body>

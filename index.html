@@ -67,6 +67,48 @@
             border-radius: 10px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
         }
+        .love-letter-container {
+    position: absolute;
+    top: 40%;
+    right: 5%;
+    width: 300px;
+    text-align: center;
+}
+
+.love-letter-container button {
+    background-color: pink;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.love-letter {
+    display: none;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 10px;
+    font-family: "Georgia", serif;
+    font-size: 18px;
+    color: darkred;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+        <div class="love-letter-container">
+    <button onclick="showLoveLetter()">💌 Click to Reveal</button>
+    <div class="love-letter" id="love-letter">
+        <p>My Dearest,</p>
+        <p>You are the best part of my days, the sweetest thought in my mind, and the warmest feeling in my heart. Every moment with you is a treasure, and I can’t wait for all the memories we have yet to make. 💖</p>
+        <p>Forever Yours,</p>
+        <p>💌 [Your Name]</p>
+    </div>
+</div>
+
+
     </style>
 </head>
 <body>
@@ -131,6 +173,11 @@
         }
         
         setTimeout(autoSlide, 3000);
+
+        function showLoveLetter() {
+    document.getElementById("love-letter").style.display = "block";
+}
+
     </script>
 </body>
 </html>

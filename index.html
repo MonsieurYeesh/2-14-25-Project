@@ -38,7 +38,7 @@
         .quote-gif {
             display: block;
             width: 100%;
-            max-width: 250px; /* Adjust size as needed */
+            max-width: 250px;
             height: auto;
             margin: 10px auto;
             border-radius: 10px;
@@ -164,12 +164,12 @@
         <img src="giphy.webp" alt="Valentine GIF" class="quote-gif">
     </div>
 
-    <!-- Love Letter Section -->
+    <!-- Love Letter Section with Password Protection -->
     <div class="love-letter-container">
-        <button onclick="showLoveLetter()">💌 Click to Reveal</button>
+        <button onclick="promptPassword()">💌 Click to Reveal</button>
         <div class="love-letter" id="love-letter">
             <p>Ms Goofy Pricilla</p>
-            <p>(think of something, hi Calina</p>
+            <p>(think of something, hi Calina)</p>
             <p>Forever Yours,</p>
             <p>Henry</p>
         </div>
@@ -204,6 +204,15 @@
         }
 
         setTimeout(autoSlide, 3000);
+
+        function promptPassword() {
+            let password = prompt("Enter the secret password to reveal the love letter:");
+            if (password === "Jasmine#1") { // Change this to your desired password
+                showLoveLetter();
+            } else {
+                alert("Incorrect password! Try again ❤️");
+            }
+        }
 
         function showLoveLetter() {
             let letter = document.getElementById("love-letter");
